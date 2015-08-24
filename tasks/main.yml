@@ -1,4 +1,55 @@
 # Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
 ---
+
+- name: Detect ansible version for fixing updates in modules
+  shell: ansible-playbook --version 2> /dev/null|cut -d " " -f2
+  register: ansible_version_check
+  ignore_errors: True
+
+- name: Setting ansible version variable
+  set_fact:
+    ansible_curr_full_version: "{{ ansible_version_check['stdout'] }}"
+
+- name: Detect ansible short version
+  shell: ansible-playbook --version 2> /dev/null|cut -d " " -f2|cut -d "." -f1,2
+  register: ansible_version_check
+  ignore_errors: True
+
+- name: Setting ansible short version variable
+  set_fact:
+    ansible_curr_short_version: "{{ ansible_version_check['stdout'] }}"
+
+- name: Detect ansible major version
+  shell: ansible-playbook --version 2> /dev/null|cut -d " " -f2|cut -d "." -f1
+  register: ansible_version_check
+  ignore_errors: True
+
+- name: Setting ansible major version variable
+  set_fact:
+    ansible_curr_major_version: "{{ ansible_version_check['stdout'] }}"
+
+
+
+#- debug: msg="ansible_curr_full_version: {{ansible_curr_full_version}} ansible_curr_short_version:{{ansible_curr_short_version}} ansible_curr_major_version:{{ansible_curr_major_version}}"
+
+#- include: 
+#- debug: msg="{{ ansible_os_family }} file is {{item}}"
+#- name: Include task based on the OS enviroment
+#  include: "{{item}}"
+#  set_fact: 
+#    role_file: "{{item| basename}}"
+#  with_first_found:
+#        - "{{ ansible_os_family }}-ansible-{{ ansible_curr_full_version }}.yml"
+#        - "{{ ansible_os_family }}-ansible-{{ ansible_curr_short_version }}.yml"
+#        - "{{ ansible_os_family }}-ansible-{{ ansible_curr_major_version }}.yml"
+#        - "{{ ansible_os_family }}.yml"
+#- debug: msg="{{role_file}}"
+#- include: {{ role_file }}
+#  ignore_errors: True
+
 - include: debian-pycharm.yml
-  when: "ansible_os_family == 'Debian'"
+  when: "ansible_os_family == 'Debian' and ansible_curr_short_version not in old_ansible_versions"
+
+- include: debian-pycharm-old.yml
+  when: "ansible_os_family == 'Debian' and ansible_curr_short_version in old_ansible_versions"
+
