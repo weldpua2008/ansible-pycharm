@@ -105,7 +105,7 @@
   file:
     recurse=yes
     owner={{ pycharm_owner }}
-    dest={{pycharm_base_dir}}/pycharm-{{pycharm_version}}/pycharm/configuration
+    dest={{pycharm_base_dir}}/pycharm-{{pycharm_version}}/
   when: install_pycharm
   tags:
     - pycharm

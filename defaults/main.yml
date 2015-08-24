@@ -1,4 +1,8 @@
 # Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
+install_pycharm: True
+dir_state: "{{ 'absent' if install_pycharm else 'directory' }}"
+file_state: "{{ 'absent' if install_pycharm else 'file' }}"
+
 pycharm_owner: "{{ lookup('env','USER') }}"
 pycharm_group: "{{ lookup('env','GROUP') }}"
 home: "{{ lookup('env','HOME') }}"

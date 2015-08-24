@@ -7,6 +7,7 @@ ansible
 
 #### Variables to change
 PyCharm 4.5.3:
+* `install_pycharm` [default: `True`]: True - Install; False - Remove
 * `pycharm_major` [default: `4`]: Major version of PyCharm
 * `pycharm_minor` [default: `5`]: Minor version of PyCharm
 * `pycharm_build` [default: `3`]: Build version of PyCharm
