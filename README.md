@@ -43,4 +43,4 @@ Valeriy Solovyov
 #### Feedback, bug-reports, requests, ...
 
 Are [welcome](https://github.com/weldpua2008/ansible-pycharm/issues)!
-
+[HipChat](https://www.hipchat.com/gcHUItkTq)
