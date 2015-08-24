@@ -7,7 +7,7 @@ ansible
 
 #### Variables to change
 PyCharm 4.5.3:
-* `install_pycharm` [default: `True`]: True - Install; False - Remove
+* `pycharm_install` [default: `True`]: True - Install; False - Remove
 * `pycharm_major` [default: `4`]: Major version of PyCharm
 * `pycharm_minor` [default: `5`]: Minor version of PyCharm
 * `pycharm_build` [default: `3`]: Build version of PyCharm
@@ -18,8 +18,12 @@ PyCharm 4.5.3:
 ## Dependencies
 
 None
+## Use
+You need to create a example playbook file `example.yml` (below).
+###### Install
+ANSIBLE_SHORT_VERSION=`ansible-playbook --version 2> /dev/null|cut -d " " -f2|cut -d "." -f1,2` ansible-playbook -i 127.0.0.1,  -e "pycharm_install=True" example.yml
 
-#### Example
+#### Example playbook file (example.yml)
 
 ```yaml
 ---

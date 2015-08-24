@@ -5,11 +5,11 @@ Version=1.0
 Name=PyCharm {{ pycharm_version }}
 GenericName=Text Editor
 
-Exec={{ pycharm_base_dir }}/pycharm-{{ pycharm_version }}/bin/pycharm.sh
+Exec={{pycharm_install_path}}/bin/pycharm.sh
 Terminal=false
 #Icon=/usr/lib/pycharm/icon.xpm
 #** something like /opt/pycharm/icon.xpm **
-Icon={{ pycharm_base_dir }}/pycharm-{{ pycharm_version }}/bin/pycharm.png
+Icon={{pycharm_install_path}}/bin/pycharm.png
 Type=Application
 Categories=IDE;Development;Utility;
 Comment=Integrated Development Environment
@@ -25,5 +25,5 @@ X-Ayatana-Desktop-Shortcuts=NewWindow
 Name=New Window
 #Exec=pycharm -n
 # ** something like /opt/pycharm/pycharm **
-Exec={{ pycharm_base_dir }}/pycharm-{{ pycharm_version }}/bin/pycharm.sh
+Exec={{pycharm_install_path}}/bin/pycharm.sh
 TargetEnvironment=Unity
