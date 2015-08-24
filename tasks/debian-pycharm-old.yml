@@ -113,11 +113,11 @@
     - pycharm
 
 
-- name: fix permissions pycharm home
-  file:
-    recurse=yes
-    owner={{ pycharm_owner }}
-    dest={{pycharm_install_path}}/
-  #when: install_pycharm
-  tags:
-    - pycharm
+#- name: fix permissions pycharm home
+#  file:
+#    recurse=yes
+#    owner={{ pycharm_owner }}
+#    dest={{pycharm_install_path}}/
+#  #when: install_pycharm
+#  tags:
+#    - pycharm
