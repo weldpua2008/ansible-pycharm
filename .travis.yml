@@ -1,75 +1,63 @@
----
 language: python
-python: "2.7"
+python: '2.7'
 sudo: false
 env:
-  - ANSIBLE_VERSION=latest
-  - ANSIBLE_VERSION=1.4
-  - ANSIBLE_VERSION=1.4.1
-  - ANSIBLE_VERSION=1.4.2
-  - ANSIBLE_VERSION=1.4.3
-  - ANSIBLE_VERSION=1.4.4
-  - ANSIBLE_VERSION=1.4.5
-  - ANSIBLE_VERSION=1.5
-  - ANSIBLE_VERSION=1.5.1
-  - ANSIBLE_VERSION=1.5.2
-  - ANSIBLE_VERSION=1.5.3
-  - ANSIBLE_VERSION=1.5.4
-  - ANSIBLE_VERSION=1.5.5
-  - ANSIBLE_VERSION=1.6
-  - ANSIBLE_VERSION=1.6.1
-  - ANSIBLE_VERSION=1.6.2
-  - ANSIBLE_VERSION=1.6.3
-  - ANSIBLE_VERSION=1.6.4
-  - ANSIBLE_VERSION=1.6.5
-  - ANSIBLE_VERSION=1.6.6
-  - ANSIBLE_VERSION=1.6.7
-  - ANSIBLE_VERSION=1.6.8
-  - ANSIBLE_VERSION=1.6.9
-  - ANSIBLE_VERSION=1.6.10
-  - ANSIBLE_VERSION=1.7
-  - ANSIBLE_VERSION=1.7.1
-  - ANSIBLE_VERSION=1.7.2
-  - ANSIBLE_VERSION=1.8
-  - ANSIBLE_VERSION=1.8.1
-  - ANSIBLE_VERSION=1.8.2
-  - ANSIBLE_VERSION=1.8.3
-  - ANSIBLE_VERSION=1.8.4
-  - ANSIBLE_VERSION=1.9.0
-  - ANSIBLE_VERSION=1.9.0.1
-  - ANSIBLE_VERSION=1.9.1
-  - ANSIBLE_VERSION=1.9.2
-
+- ANSIBLE_VERSION=latest
+- ANSIBLE_VERSION=1.4
+- ANSIBLE_VERSION=1.4.1
+- ANSIBLE_VERSION=1.4.2
+- ANSIBLE_VERSION=1.4.3
+- ANSIBLE_VERSION=1.4.4
+- ANSIBLE_VERSION=1.4.5
+- ANSIBLE_VERSION=1.5
+- ANSIBLE_VERSION=1.5.1
+- ANSIBLE_VERSION=1.5.2
+- ANSIBLE_VERSION=1.5.3
+- ANSIBLE_VERSION=1.5.4
+- ANSIBLE_VERSION=1.5.5
+- ANSIBLE_VERSION=1.6
+- ANSIBLE_VERSION=1.6.1
+- ANSIBLE_VERSION=1.6.2
+- ANSIBLE_VERSION=1.6.3
+- ANSIBLE_VERSION=1.6.4
+- ANSIBLE_VERSION=1.6.5
+- ANSIBLE_VERSION=1.6.6
+- ANSIBLE_VERSION=1.6.7
+- ANSIBLE_VERSION=1.6.8
+- ANSIBLE_VERSION=1.6.9
+- ANSIBLE_VERSION=1.6.10
+- ANSIBLE_VERSION=1.7
+- ANSIBLE_VERSION=1.7.1
+- ANSIBLE_VERSION=1.7.2
+- ANSIBLE_VERSION=1.8
+- ANSIBLE_VERSION=1.8.1
+- ANSIBLE_VERSION=1.8.2
+- ANSIBLE_VERSION=1.8.3
+- ANSIBLE_VERSION=1.8.4
+- ANSIBLE_VERSION=1.9.0
+- ANSIBLE_VERSION=1.9.0.1
+- ANSIBLE_VERSION=1.9.1
+- ANSIBLE_VERSION=1.9.2
 branches:
   only:
-    - master
-
+  - master
 before_install:
-  - sudo apt-get update -qq
-
+- sudo apt-get update -qq
 install:
-  # Install Ansible.
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install --upgrade ansible; else pip install --upgrade ansible==$ANSIBLE_VERSION; fi
-
-  # Add ansible.cfg to pick up roles path.
-  - printf "[defaults]\nroles_path = ../" > ansible.cfg
-
+- if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install --upgrade ansible; else pip
+  install --upgrade ansible==$ANSIBLE_VERSION; fi
+- printf "[defaults]\nroles_path = ../" > ansible.cfg
 script:
-  # Check the role/playbook's syntax.
-  - ansible-playbook -i tests/test-inventory tests/test.yml --syntax-check
+- ansible-playbook -i tests/test-inventory tests/test.yml --syntax-check
+- ansible-playbook -i tests/test-inventory tests/test.yml --connection=local --sudo
+  -vvvv
+- ! 'ansible-playbook -i tests/test-inventory tests/test.yml --connection=local --sudo
+  | grep -q ''changed=0.*failed=0'' && (echo ''Idempotence test: pass'' && exit 0)
+  || (echo ''Idempotence test: fail'' && exit 1)
 
-  # Run the role/playbook with ansible-playbook.
-  - ansible-playbook -i tests/test-inventory tests/test.yml --connection=local --sudo -vvvv
-
-  # Run the role/playbook again, checking to make sure it's idempotent.
-  - >
-    ansible-playbook -i tests/test-inventory tests/test.yml --connection=local --sudo
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-
-#notifications:
-#  email: false
-#  hipchat:
-#    rooms:
-
+'
+notifications:
+  email: false
+  hipchat:
+    rooms:
+      secure: K70x/dHuCKTKkW2Pqd5YMDctpCXkg2crE9zU2uzN0o8VDCCKptrvAj4mKGZPZZHOicYd7W5f8au/v+hfNquZ1mT+AiPxQQGgxKzqZBCZPvWH66ttAxntxMi5KjU1xOofGVrs6Btp99Zu1ICNmWMX1AZ8g6KCYRGzzFgSPWVJeVqQXFSC62ADaxPBkf1h9pHw9zZzWt+zcmZHpK5UzfDVLumMtYb3lF+k1ho+HkMA73BYPL8lw3YvaXa9wYhX9jgOkk/5L5HATyEFQO+60hKMa/VzVrOKBrltUQL1UkTtif7Wm5QzbjoJS5pBX55vC+k12SVDM/bzW2zMtFCPw457oLEyrSVzQzagltHiKnTAMtf8PJ6mwc6g197tbVo8eYm8hXryEFY+i/pez3LvHVdeTldRyI9/cD/DiN9Gnefv1sGNJ9eD+cBUKeQ0VzeP/L6JXXJQg+Xntx3ykh9AAxOmJtaouPHJK57EKnUNZ4sTIHa8j5LlJ3c+Es95RyOLxj8X9ch4k8BEw1uIf7sdD5t1ZXiP0wlmY2bIBJf1ryP4Rj+C3TruuMHQWHEvrsgjDUjCwQcVkZ7H0enN/iP4J5I4CkNRn9zd+0Waz1Z+4hvD1b3kYdIvclW4F0TKJa6txZAg+eTo18WXDf8w4OGS92Q9+OQQhL3kZaEhYwsDi4jQYNQ=
