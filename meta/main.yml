@@ -5,18 +5,23 @@ galaxy_info:
   author: Valeriy Solovyov
   description: Set up PyCharm
   license: MIT
-  min_ansible_version: 1.5
+  min_ansible_version: 1.4
   platforms:
+    - name: EL
+      versions:
+        - all
     - name: Ubuntu
       versions:
-        - lucid
-        - precise
-        - trusty
+        - all
+#        - lucid
+#        - precise
+#        - trusty
     - name: Debian
       versions:
-        - squeeze
-        - wheezy
-        - jessie
+        - all
+#        - squeeze
+#        - wheezy
+#        - jessie
   categories:
     - development
     - system
