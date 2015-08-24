@@ -50,6 +50,8 @@ install:
 script:
  - ansible-playbook -i tests/test-inventory tests/test.yml --syntax-check
  - ansible-playbook -i tests/test-inventory tests/test.yml --connection=local --sudo
+ # See the output
+ - ansible-playbook -i tests/test-inventory tests/test.yml --connection=local --sudo
 
  # Run the role/playbook again, checking to make sure it's idempotent.
  - >
