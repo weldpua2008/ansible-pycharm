@@ -1,0 +1,4 @@
+---
+- hosts: all
+  roles:
+    - weldpua2008.pycharm
