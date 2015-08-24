@@ -1,0 +1,23 @@
+# Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
+# meta file for PyCharm
+---
+galaxy_info:
+  author: Valeriy Solovyov
+  description: Set up PyCharm
+  license: MIT
+  min_ansible_version: 1.5
+  platforms:
+    - name: Ubuntu
+      versions:
+        - lucid
+        - precise
+        - trusty
+    - name: Debian
+      versions:
+        - squeeze
+        - wheezy
+        - jessie
+  categories:
+    - development
+    - system
+dependencies: []

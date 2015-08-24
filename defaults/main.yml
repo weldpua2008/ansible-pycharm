@@ -1,0 +1,21 @@
+# Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
+pycharm_owner: "{{ lookup('env','USER') }}"
+pycharm_group: "{{ lookup('env','GROUP') }}"
+home: "{{ lookup('env','HOME') }}"
+pycharm_owner_home: "{{ home }}"
+pycharm_icon_path: "{{ home }}/Desktop/"
+pycharm_base_dir: "/usr/local/pycharm"
+pycharm_link_base_dir: "/opt"
+pycharm_dir_tmp: "{{ pycharm_base_dir }}/tmp" # or override with "{{ tempdir.stdout }} in order to have be sure to download the file"
+cur_dir: "{{lookup('pipe','pwd')}}"
+
+pycharm_type: "community"
+pycharm_major: "4"
+pycharm_minor: "5"
+pycharm_build: "3"
+pycharm_version: "{{pycharm_major}}.{{pycharm_minor}}.{{pycharm_build}}"
+pycharm_archive: "pycharm-{{pycharm_type}}-{{pycharm_version}}.tar.gz"
+
+pycharm_url: "http://download-cf.jetbrains.com/python/{{ pycharm_archive }}"
+
+pycharm_home_dir: "{{pycharm_base_dir}}/{{pycharm_name}}-{{pycharm_version}}"

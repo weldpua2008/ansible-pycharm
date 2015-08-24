@@ -1,0 +1,4 @@
+# Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
+---
+- include: debian-pycharm.yml
+  when: "ansible_os_family == 'Debian'"
