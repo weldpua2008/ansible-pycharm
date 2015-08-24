@@ -24,7 +24,17 @@ You need to create a example playbook file `example.yml` (below).
 ANSIBLE_SHORT_VERSION=`ansible-playbook --version 2> /dev/null|cut -d " " -f2|cut -d "." -f1,2` ansible-playbook -i 127.0.0.1,  -e "pycharm_install=True" example.yml
 
 #### Example playbook file (example.yml)
+If you are using Ansible Galaxy
+ansible-galaxy install weldpua2008.pycharm
 
+```yaml
+---
+- hosts: all
+  roles:
+    - weldpua2008.pycharm
+```
+
+if you not using Ansible Galaxy
 ```yaml
 ---
 - hosts: all
