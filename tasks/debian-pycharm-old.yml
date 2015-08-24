@@ -66,7 +66,7 @@
   unarchive:
     src={{ pycharm_dir_tmp }}/{{pycharm_archive}}
     dest={{pycharm_install_path}}
-    copy=no
+    #copy=no
 #    owner={{ pycharm_owner }}
 #    group={{ pycharm_group }}
   when: install_pycharm
