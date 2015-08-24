@@ -53,3 +53,5 @@
 - include: debian-pycharm-old.yml
   when: "ansible_os_family == 'Debian' and ansible_curr_short_version in old_ansible_versions"
 
+- debug: msg="{{ install_pycharm }}"
+
