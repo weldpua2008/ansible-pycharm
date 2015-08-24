@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/weldpua2008/ansible-pycharm.svg)](https://travis-ci.org/weldpua2008/ansible-pycharm)
+[![Build Status](https://travis-ci.org/weldpua2008/ansible-pycharm.svg)](https://travis-ci.org/weldpua2008/ansible-pycharm) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-pycharm-blue.svg)](https://galaxy.ansible.com/list#/roles/4854)
 # ansible-pycharm
 The ansible role to install [PyCharm](https://www.jetbrains.com/pycharm/).
 #### Requirements
