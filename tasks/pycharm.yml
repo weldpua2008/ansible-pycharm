@@ -1,0 +1,114 @@
+# Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
+
+#- name: Include the vars for chosen version PyCharm 4.5
+#  include_vars: 45.yml
+#  when: pycharm_version == "4.5"
+#  tags:
+#    - pycharm
+
+#- name: Create pycharm directories
+#  shell: mkdir -p {{ pycharm_dir_tmp }}; mkdir -p {{pycharm_install_path}};  mkdir -p {{ pycharm_icon_path }}
+#  when: install_pycharm
+#  ignore_errors: True
+#  tags:
+#    - pycharm
+
+- name: Create base directory
+  file:
+    dest="{{ item }}"
+    state={{ dir_state }}
+#    owner="{{pycharm_owner}}"
+#    group="{{pycharm_group}}"
+  with_items:
+    - "{{ pycharm_dir_tmp }}"
+    - "{{pycharm_install_path}}"
+    - "{{ pycharm_icon_path }}"
+  tags:
+    - pycharm
+
+- name: Download pycharm
+  get_url: url={{ pycharm_url }}  dest={{ pycharm_dir_tmp }}/{{ pycharm_archive }} force=no validate_certs=no
+  when: install_pycharm
+  tags:
+    - pycharm
+
+
+- name: Check that PyCharm was downloaded
+  stat: path={{ pycharm_dir_tmp }}/{{ pycharm_archive }}
+  when: install_pycharm
+  register: st
+  tags:
+    - pycharm
+
+
+- name: Fail if PyCharm archive wasn't download
+  fail: msg="PyCharm wasn't download"
+  when: st.stat.exists == False and install_pycharm is defined and install_pycharm
+  tags:
+    - pycharm
+
+#- name: Change attributes of the downloaded archive
+#  file: path="{{ pycharm_dir_tmp }}/{{pycharm_archive}}" owner="{{pycharm_owner}}" group="{{pycharm_group}}" mode=0644
+#  when: install_pycharm
+#  tags:
+#    - pycharm
+
+#- name: Create base directory
+#  file:
+#    dest="{{ pycharm_base_dir }}/pycharm-{{pycharm_version}}"
+#    state={{ dir_state }}
+#    owner="{{pycharm_owner}}"
+#    group="{{pycharm_group}}"
+#  tags:
+#    - pycharm
+
+- name: Extract archive pycharm
+  unarchive:
+    src={{ pycharm_dir_tmp }}/{{pycharm_archive}}
+    dest={{pycharm_install_path}}
+    copy=no
+#    owner={{ pycharm_owner }}
+#    group={{ pycharm_group }}
+  when: install_pycharm
+  tags:
+    - pycharm
+
+#- name: Extract archive pycharm
+#  command: tar xzf  {{ pycharm_dir_tmp }}/{{pycharm_archive}} -C {{pycharm_install_path}} --strip-components=1
+#  when: install_pycharm
+#  tags:
+#    - pycharm
+
+#- name: Stat {{pycharm_install_path}}
+#  stat: path={{pycharm_install_path}}
+#  when: install_pycharm
+#  register: pycharm_archive_extracted_present
+#  tags:
+#    - pycharm
+
+- name: Configure pycharm icon
+  template: src=pycharm.desktop.j2 dest={{ pycharm_icon_path }}/pycharm.desktop
+  when: install_pycharm
+  ignore_errors: yes
+  tags:
+    - pycharm
+
+
+- name: Fix pycharm icon presence and permitions
+  file:
+    path={{ pycharm_icon_path }}/pycharm.desktop
+    state={{ file_state }}
+    #owner="{{pycharm_owner}}"
+    #group="{{pycharm_group}}"
+  tags:
+    - pycharm
+
+
+#- name: fix permissions pycharm home
+#  file:
+#    recurse=yes
+#    owner={{ pycharm_owner }}
+#    dest={{pycharm_install_path}}/
+#  #when: install_pycharm
+#  tags:
+#    - pycharm

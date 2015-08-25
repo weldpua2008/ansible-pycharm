@@ -1,9 +1,9 @@
 # Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
 
 - name: Install tar
-  apt:
+  yum:
     name=tar
     state="present"
-  when: "test_tar.rc != 0 and install_pycharm is defined and install_pycharm"
+  when: install_pycharm
   tags:
     - pycharm
