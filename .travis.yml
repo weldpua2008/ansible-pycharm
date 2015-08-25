@@ -70,7 +70,7 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
  # Run tests on Ubuntu 14
- - ls -la ./; pwd
+ # - ls -la ./; pwd
 
  - docker run --rm=true -v `pwd`:/ansible-pycharm:rw ubuntu:14.04 /bin/bash -c "/ansible-pycharm/tests/test-on-deb.sh $ANSIBLE_SHORT_VERSION"
  # Run tests on Ubuntu 12
