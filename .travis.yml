@@ -39,15 +39,23 @@ env:
 branches:
   only:
   - master
+
+services:
+  - docker
+
 before_install:
-- sudo apt-get update -qq
+  - docker pull ubuntu:14.04
+  - docker pull ubuntu:12.04
+  - docker pull centos:6
+  - docker pull centos:7
+  - sudo apt-get update -qq
+
 install:
 - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install --upgrade ansible; else pip
   install --upgrade ansible==$ANSIBLE_VERSION; fi
 - printf "[defaults]\nroles_path = ../" > ansible.cfg
 script:
  - ansible-playbook -i tests/test-inventory tests/test.yml --syntax-check
- #- ANSIBLE_SHORT_VERSION=`ansible-playbook --version 2> /dev/null|cut -d " " -f2|cut -d "." -f1,2` ansible-playbook -i tests/test-inventory tests/test.yml --connection=local --sudo
  # See the output
  - ANSIBLE_SHORT_VERSION=`ansible-playbook --version 2> /dev/null|cut -d " " -f2|cut -d "." -f1,2` ansible-playbook -i tests/test-inventory tests/test.yml --connection=local --sudo
 
@@ -57,6 +65,13 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+ # Run tests on Ubuntu 14
+ - docker run --rm=true -v `pwd`/ansible-pycharm:/ansible-pycharm:rw ubuntu:14.04 /bin/bash -c "/ansible-pycharm/tests/test-on-deb.sh"
+ # Run tests on Ubuntu 12
+ # Run tests on CentOs 6
+ # Run tests on CentOs 7
+
 
 notifications:
   email: false
