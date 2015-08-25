@@ -26,7 +26,6 @@ fi
 
 set -e
 
-
 if [ "$ANSIBLE_VERSION" = "latest" ]; then
 
     pip install --upgrade ansible;
