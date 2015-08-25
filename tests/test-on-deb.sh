@@ -8,7 +8,7 @@ set -e
 
 SOURCE="${BASH_SOURCE[0]}"
 RDIR="$( dirname "$SOURCE" )"
-ANSIBLE_VERSION=$1
+ANSIBLE_VERSION=${1:-latest}
 
 apt-get update
 apt-get install python-pip python-dev
