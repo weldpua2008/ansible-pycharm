@@ -11,7 +11,7 @@ RDIR="$( dirname "$SOURCE" )"
 ANSIBLE_VERSION=${1:-latest}
 
 apt-get update
-apt-get install python-pip python-dev
+apt-get install python-pip python-dev -y
 
 if [ "$ANSIBLE_VERSION" = "latest" ]; then
     pip install --upgrade ansible;

@@ -48,10 +48,12 @@
 #  ignore_errors: True
 
 - include: debian-pycharm.yml
-  when: "ansible_os_family == 'Debian' and ansible_curr_short_version not in old_ansible_versions"
+  #when: "ansible_os_family == 'Debian' and ansible_curr_short_version not in old_ansible_versions"
+  when: "ansible_curr_short_version not in old_ansible_versions"
 
 - include: debian-pycharm-old.yml
-  when: "ansible_os_family == 'Debian' and ansible_curr_short_version in old_ansible_versions"
+  #when: "ansible_os_family == 'Debian' and ansible_curr_short_version in old_ansible_versions"
+  when: "ansible_curr_short_version in old_ansible_versions"
 
 #- debug: msg="ansible_curr_short_version:{{ansible_curr_short_version}} install_pycharm:{{ install_pycharm }}"
 
