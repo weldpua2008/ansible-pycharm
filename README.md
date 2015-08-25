@@ -1,10 +1,18 @@
-[![Build Status](https://travis-ci.org/weldpua2008/ansible-pycharm.svg)](https://travis-ci.org/weldpua2008/ansible-pycharm) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-pycharm-blue.svg)](https://galaxy.ansible.com/list#/roles/4854)
+[![Build Status](https://travis-ci.org/weldpua2008/ansible-pycharm.svg)](https://travis-ci.org/weldpua2008/ansible-pycharm) 
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-pycharm-blue.svg)](https://galaxy.ansible.com/list#/roles/4854)
 [![Circle CI](https://circleci.com/gh/weldpua2008/ansible-pycharm/tree/master.svg?style=svg)](https://circleci.com/gh/weldpua2008/ansible-pycharm/tree/master)
 
 # ansible-pycharm
-The ansible role to install [PyCharm](https://www.jetbrains.com/pycharm/).
-#### Requirements
+The ansible role to install [PyCharm](https://www.jetbrains.com/pycharm/) through Ansible.
+Tested on Ubuntu Linux:
+*   12.04
+*   14.04
 
+Tested on CentOs Linux:
+* 6
+* 7
+
+#### Requirements
 ansible 
 
 #### Variables to change
