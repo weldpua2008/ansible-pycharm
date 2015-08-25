@@ -12,11 +12,17 @@ OS_VERSION=`cat /etc/redhat-release | grep -oE '[0-9]+\.[0-9]+'|cut -d "." -f1`
 
 set -e
 if [ "${OS_VERSION}" == "7" ];then
-
+    set +e
     yum -y install epel-release
     yum -y update  
+    yum remove iputils-20121221-6.el7.x86_64 -y
+    yum -y update
     yum -y groupinstall  "Development Tools" 
+    yum -y update
+
     yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel 
+
+    set -e
     pip install --upgrade pip 
 else
     yum -y install epel-release&& yum -y update && yum install gcc glibc glibc-common  -y && yum -y groupinstall  "Development Tools" &&  yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel&& pip install --upgrade pip
