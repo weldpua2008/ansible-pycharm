@@ -13,7 +13,11 @@ OS_VERSION=`cat /etc/redhat-release | grep -oE '[0-9]+\.[0-9]+'|cut -d "." -f1`
 set -e
 if [ "${OS_VERSION}" == "7" ];then
 
-    yum -y install epel-release&& yum -y update && yum -y groupinstall  "Development Tools" && yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel && pip install --upgrade pip 
+    yum -y install epel-release
+    yum -y update  
+    yum -y groupinstall  "Development Tools" 
+    yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel 
+    pip install --upgrade pip 
 else
     yum -y install epel-release&& yum -y update && yum install gcc glibc glibc-common  -y && yum -y groupinstall  "Development Tools" &&  yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel&& pip install --upgrade pip
 fi
