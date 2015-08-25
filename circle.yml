@@ -1,6 +1,9 @@
 machine:
-  services:
-    - docker
+    services:
+        - docker
+    environment:
+        ANSIBLE_VERSION:latest
+
 
 dependencies:
   override:
@@ -11,9 +14,6 @@ dependencies:
 test:
   override:
     - docker run --rm=true -v `pwd`:/ansible-pycharm:rw ubuntu:14.04 /bin/bash -c "/ansible-pycharm/tests/test-on-deb.sh $ANSIBLE_SHORT_VERSION"
-        environment:
-           ANSIBLE_VERSION:latest
-
     # Run tests on Ubuntu 12
     - docker run --rm=true -v `pwd`:/ansible-pycharm:rw ubuntu:12.04 /bin/bash -c "/ansible-pycharm/tests/test-on-deb.sh $ANSIBLE_SHORT_VERSION"
     #   # Run tests on CentOs 6
