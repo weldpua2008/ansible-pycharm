@@ -14,12 +14,12 @@ dependencies:
 test:
   override:
     - docker --version
-    - docker run --rm=true -v `pwd`:/ansible-pycharm:rw ubuntu:14.04 /bin/bash -c "/ansible-pycharm/tests/test-on-deb.sh $ANSIBLE_SHORT_VERSION"
+    - docker run  -v `pwd`:/ansible-pycharm:rw ubuntu:14.04 /bin/bash -c "/ansible-pycharm/tests/test-on-deb.sh $ANSIBLE_SHORT_VERSION"
     # Run tests on Ubuntu 12
 #    - docker run --rm=true -v `pwd`:/ansible-pycharm:rw ubuntu:12.04 /bin/bash -c "/ansible-pycharm/tests/test-on-deb.sh $ANSIBLE_SHORT_VERSION"
     #   # Run tests on CentOs 6
-    - docker run --rm=true -v `pwd`:/ansible-pycharm:rw centos:6 /bin/bash -c "/ansible-pycharm/tests/test-on-rpm.sh $ANSIBLE_SHORT_VERSION"
+    - docker run -v `pwd`:/ansible-pycharm:rw centos:6 /bin/bash -c "/ansible-pycharm/tests/test-on-rpm.sh $ANSIBLE_SHORT_VERSION"
     #     # Run tests on CentOs 7
-    - docker run --rm=true -v `pwd`:/ansible-pycharm:rw centos:7 /bin/bash -c "/ansible-pycharm/tests/test-on-rpm.sh $ANSIBLE_SHORT_VERSION"
+    - docker run -v `pwd`:/ansible-pycharm:rw centos:7 /bin/bash -c "/ansible-pycharm/tests/test-on-rpm.sh $ANSIBLE_SHORT_VERSION"
   
 
