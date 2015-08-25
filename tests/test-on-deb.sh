@@ -19,17 +19,21 @@ if [ "${OS_VERSION}" == "12" ];then
     apt-get remove ansible --purge  -y
     apt-get install python-dev python2.7-dev python-pip -y
     apt-get install --reinstall python-pkg-resources -y
-    #easy_install --upgrade pip
+    easy_install --upgrade pip
+    easy_install --upgrade ansible
+
 fi
 
 set -e
 
 
 if [ "$ANSIBLE_VERSION" = "latest" ]; then
+
     pip install --upgrade ansible;
 else
     pip install --upgrade ansible==$ANSIBLE_VERSION;
 fi
+
 
 cd $RDIR/..
 
