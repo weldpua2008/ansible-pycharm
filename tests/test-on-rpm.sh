@@ -13,9 +13,15 @@ ANSIBLE_VERSION=${1:-latest}
 yum -y install epel-release&& yum -y update && yum install gcc glibc glibc-common  -y && yum -y groupinstall  "Development Tools" &&  yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel&& pip install --upgrade pip
 
 if [ "$ANSIBLE_VERSION" = "latest" ]; then
-    pip install --upgrade ansible;
+    pip install --upgrade ansible
+    yum erase -y python-paramiko python-crypto;yum install -y python-paramiko python-crypto
+    pip install --upgrade ansible
+
 else
     pip install --upgrade ansible==$ANSIBLE_VERSION;
+    yum erase -y python-paramiko python-crypto;yum install -y python-paramiko python-crypto
+    pip install --upgrade ansible==$ANSIBLE_VERSION;
+
 fi
 
 cd $RDIR/..
