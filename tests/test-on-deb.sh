@@ -4,14 +4,20 @@
 # Valeriy Solovyov <weldpua2008@gmail.com>
 # Copyright(c) 2015
 ###############################################
-set -e
 
 SOURCE="${BASH_SOURCE[0]}"
 RDIR="$( dirname "$SOURCE" )"
 ANSIBLE_VERSION=${1:-latest}
+OS_VERSION=`cat /etc/*release | grep -oE '[0-9]+\.[0-9]+'|cut -d "." -f1 |head -n 1`
 
 apt-get update
 apt-get install python-pip python-dev -y
+if [ "${OS_VERSION}" == "12" ];then
+    apt-get install python-setuptools -y
+fi
+
+set -e
+
 
 if [ "$ANSIBLE_VERSION" = "latest" ]; then
     pip install --upgrade ansible;
