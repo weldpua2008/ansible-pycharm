@@ -14,8 +14,12 @@ apt-get update
 apt-get install python-pip python-dev -y
 if [ "${OS_VERSION}" == "12" ];then
     apt-get install python-setuptools -y
+    apt-get install    build-essential -y
     apt-get install ansible -y
-    apt-get remove ansible -y
+    apt-get remove ansible --purge  -y
+    apt-get install python-dev python2.7-dev python-pip -y
+    apt-get install --reinstall python-pkg-resources -y
+    #easy_install --upgrade pip
 fi
 
 set -e
