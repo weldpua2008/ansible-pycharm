@@ -4,13 +4,20 @@
 # Valeriy Solovyov <weldpua2008@gmail.com>
 # Copyright(c) 2015
 ###############################################
-set -e
 
 SOURCE="${BASH_SOURCE[0]}"
 RDIR="$( dirname "$SOURCE" )"
 ANSIBLE_VERSION=${1:-latest}
+OS_VERSION=`cat /etc/redhat-release | grep -oE '[0-9]+\.[0-9]+'|cut -d "." -f1`
 
-yum -y install epel-release&& yum -y update && yum install gcc glibc glibc-common  -y && yum -y groupinstall  "Development Tools" &&  yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel&& pip install --upgrade pip
+set -e
+if [ "${OS_VERSION}" == "7" ];then
+
+    yum -y install epel-release&& yum -y update && yum -y groupinstall  "Development Tools" && yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel && pip install --upgrade pip 
+else
+    yum -y install epel-release&& yum -y update && yum install gcc glibc glibc-common  -y && yum -y groupinstall  "Development Tools" &&  yum install -y PyYAML libyaml python-babel python-crypto python-simplejson python-paramiko python-pip python-crypto python-httplib2  python-jinja2  python-keyczar python-pyasn1 python-devel&& pip install --upgrade pip
+fi
+
 
 if [ "$ANSIBLE_VERSION" = "latest" ]; then
     pip install --upgrade ansible
