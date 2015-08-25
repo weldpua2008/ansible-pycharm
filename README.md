@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/weldpua2008/ansible-pycharm.svg)](https://travis-ci.org/weldpua2008/ansible-pycharm) 
-[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-pycharm-blue.svg)](https://galaxy.ansible.com/list#/roles/4854)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-pycharm-blue.svg)](https://galaxy.ansible.com/list#/roles/4854) [![Build Status](https://travis-ci.org/weldpua2008/ansible-pycharm.svg)](https://travis-ci.org/weldpua2008/ansible-pycharm) 
 [![Circle CI](https://circleci.com/gh/weldpua2008/ansible-pycharm/tree/master.svg?style=svg)](https://circleci.com/gh/weldpua2008/ansible-pycharm/tree/master)
 
 # ansible-pycharm
