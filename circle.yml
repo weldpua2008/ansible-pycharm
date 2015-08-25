@@ -2,7 +2,7 @@ machine:
     services:
         - docker
     environment:
-        ANSIBLE_VERSION:latest
+        ANSIBLE_VERSION: latest
 
 
 dependencies:
